@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Рахмет!</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #ffc0cb;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 { font-size: 3rem; margin: 0 0 12px; }
+    p  { font-size: 1.3rem; font-weight: bold; margin: 0; }
+    .big { font-size: 5rem; margin-bottom: 10px; }
+ 
+    .heart {
+      position: fixed;
+      top: -30px;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh); opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="big">🥰</div>
+  <h1>Рахмет!</h1>
+  <p>Кешіргенің үшін көп рахмет ❤️</p>
+ 
+  <script>
+    setInterval(() => {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = '💗';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.fontSize = (14 + Math.random() * 18) + 'px';
+      h.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 7000);
+    }, 200);
+  </script>
+</body>
+</html>

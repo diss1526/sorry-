@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>мені кешірші</title>
+  <style>
+    * { box-sizing: border-box; }
+ 
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffc0cb;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+ 
+    .box { text-align: center; }
+ 
+    h1 { font-size: 2.6rem; margin: 0 0 16px; }
+    p  { font-size: 1.2rem; font-weight: bold; margin: 0 0 28px; }
+ 
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+ 
+    button {
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-family: inherit;
+      transition: font-size 0.4s ease, left 0.35s ease, top 0.35s ease;
+    }
+ 
+    /* padding em-мен берілген, сондықтан font-size өскенде кнопка да өседі */
+    #yes {
+      background: green;
+      font-size: 1rem;
+      padding: 0.7em 1.6em;
+    }
+ 
+    #no {
+      background: red;
+      font-size: 1rem;
+      padding: 0.7em 1.6em;
+    }
+ 
+    /* жүрекшелер */
+    .heart {
+      position: fixed;
+      top: -30px;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh); opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Рано мені кешірші</h1>
+    <p>кешіресің бе?</p>
+    <div class="buttons">
+      <button id="yes">Ия</button>
+      <button id="no">Жоқ</button>
+    </div>
+  </div>
+ 
+  <script>
+    const yesBtn = document.getElementById('yes');
+    const noBtn  = document.getElementById('no');
+ 
+    let size = 1.0;       // "Ия" кнопкасының font-size (rem)
+    const step = 0.2;     // 1.0 -> 1.2 -> 1.4 -> 1.6 ...
+ 
+    // "Жоқ" басылғанда
+    noBtn.addEventListener('click', () => {
+      // 1) "Ия" үлкейеді
+      size += step;
+      yesBtn.style.fontSize = size.toFixed(1) + 'rem';
+ 
+      // 2) "Жоқ" кез келген жерге ауысады
+      const maxX = window.innerWidth  - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+ 
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = Math.random() * maxX + 'px';
+      noBtn.style.top  = Math.random() * maxY + 'px';
+    });
+ 
+    // "Ия" басылса — жаңа бетке өтеді
+    yesBtn.addEventListener('click', () => {
+      window.location.href = 'yes.html';
+    });
+ 
+    // жүрекшелер жауып тұрады
+    setInterval(() => {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = '💗';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.fontSize = (12 + Math.random() * 14) + 'px';
+      h.style.animationDuration = (4 + Math.random() * 4) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 8000);
+    }, 500);
+  </script>
+</body>
+</html>
+ 
